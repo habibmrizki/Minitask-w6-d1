@@ -1,18 +1,17 @@
-import React, { useState, useContext } from "react";
-import { TodoContext } from "../contexts/todo/TodoProvider";
+import React, { useState } from "react";
+
+import { addTodo } from "../redux/slices/todo";
+import { useDispatch } from "react-redux";
 
 const TodoForm = () => {
-  const { dispatch } = useContext(TodoContext);
+  const dispatch = useDispatch();
   const [judul, setJudul] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (judul.trim() === "") return;
 
-    dispatch({
-      type: "ADD_TODO",
-      payload: { judul },
-    });
+    dispatch(addTodo({ judul }));
     setJudul("");
   };
 
